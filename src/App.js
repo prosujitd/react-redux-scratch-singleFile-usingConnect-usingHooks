@@ -1,22 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import CounterWithConnect from "./components/CounterWithConnect";
+import { Provider } from "react-redux";
+
+import store from "./store";
+import CounterWithHooks from "./components/CounterWithHooks";
+
+store.subscribe(() => console.log("subscribed value ", store.getState()));
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Provider store={store}>
+          <h3>Redux -  createStore On Single File</h3>
+
+          <h4 style={{marginBottom:'-3px'}}>using With Connect</h4>
+          <CounterWithConnect />
+
+          <h4 style={{marginBottom:'-3px'}}>using With Hooks (useSelector & useDispatch)</h4>
+          <CounterWithHooks />
+
+        </Provider>
       </header>
     </div>
   );
